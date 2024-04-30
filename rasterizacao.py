@@ -54,3 +54,32 @@ class Mundo2D:
 
     def pegarFace(self, index):
         return self.faces[index]
+    
+def rasterizarLinha(xInicial, yInicial, xFinal, yFinal, numeroDePontos):
+    lista = []
+
+    diferencaEntreX = xFinal - xInicial
+    diferencaEntreY = yFinal - yInicial
+
+    if abs(diferencaEntreX) >= abs(diferencaEntreY):
+        passos = abs(diferencaEntreX)
+    else:
+        passos = abs(diferencaEntreY)
+
+    pontoMedioX = diferencaEntreX / (numeroDePontos - 1)
+    pontoMedioY = diferencaEntreY / (numeroDePontos - 1)
+
+    x = xInicial
+    y = yInicial
+
+    for i in range(numeroDePontos):
+        xArredondado, yArredondado = (x, y)
+        
+        if xArredondado >= min(xInicial, xFinal) and xArredondado <= max(xInicial, xFinal) and \
+           yArredondado >= min(yInicial, yFinal) and yArredondado <= max(yInicial, yFinal):
+            lista.append((xArredondado, yArredondado))
+
+        x += pontoMedioX
+        y += pontoMedioY
+
+    return lista
