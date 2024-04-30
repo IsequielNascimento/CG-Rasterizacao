@@ -24,3 +24,33 @@ class Face:
                 pontos[(i + 1) % len(pontos)]
             ))
 
+class Mundo2D:
+    def __init__(self):
+        self.pontos = []  # Lista de pontos
+        self.faces = []   # Lista de faces
+        self.arestas = [] # Lista de arestas
+        self.cor = [255, 0, 0]
+
+    def adicionarPonto(self, x, y):
+        ponto = Ponto(x, y)
+        self.pontos.append(ponto)
+        return ponto
+
+    def adicionarFace(self, ponto_indices):
+        pontos = [self.pontos[i] for i in ponto_indices]
+        face = Face(pontos)
+        self.faces.append(face)
+
+        # Atualização da lista de arestas
+        for aresta in face.arestas:
+            if aresta not in self.arestas:
+                self.arestas.append(aresta)
+
+    def pegarPonto(self, index):
+        return self.pontos[index]
+
+    def pegarAresta(self, index):
+        return self.arestas[index]
+
+    def pegarFace(self, index):
+        return self.faces[index]
