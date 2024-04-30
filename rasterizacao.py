@@ -83,3 +83,20 @@ def rasterizarLinha(xInicial, yInicial, xFinal, yFinal, numeroDePontos):
         y += pontoMedioY
 
     return lista
+
+def plotarRasterizacao(aresta, numeroDePontos):
+    pontos = rasterizarLinha(aresta.p1.x, aresta.p1.y, aresta.p2.x, aresta.p2.y, numeroDePontos)
+    
+    # Inicializar o gráfico
+    plt.figure(figsize=(8, 8))
+    plt.grid()
+    plt.axis('equal')
+        
+    for ponto in pontos[1:-1]:  # Exclui os pontos iniciais e finais
+        plt.plot(ponto[0], ponto[1], 'ks', markersize=2)
+
+    # Plotar os pontos finais
+    plt.plot([aresta.p1.x, aresta.p2.x], [aresta.p1.y, aresta.p2.y], 'ro')
+
+    # Mostrar o gráfico
+    plt.show()
